@@ -1093,3 +1093,6 @@ h3{font-size: 22px; margin:0 0 10px 0;}
   color:#102016;
   font-weight:900;
 }
+
+.calendar-rail{display:flex;gap:14px;overflow:auto;padding-bottom:6px;}
+.calendar-card{min-width:320px;max-width:320px;}

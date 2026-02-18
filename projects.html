@@ -26,7 +26,7 @@
       <div class="hero__row">
         <div class="hero__text">
           <h1 class="hero__title">Projects</h1>
-          <p class="hero__lede">Browse OpenTEAM working group projects and related resources. Use filters to find what you need.</p>
+          <p class="hero__lede">Browse OpenTEAM working group projects and Metagov projects. Use filters to find what you need.</p>
         </div>
         <a class="pill" href="index.html">Back to index ↗</a>
       </div>
@@ -65,10 +65,10 @@
 <script>
 // ==============================
 // EDIT IN GITHUB
-// 1) Show/hide rails: set show: true/false
-// 2) Rail filter chips: edit filters array per rail
-// 3) Turn search/filters on/off per rail: showSearch/showFilters
-// 4) Reorder rails by reordering RAILS_CONFIG
+// - Toggle rails: show true/false
+// - Toggle search/filter per rail: showSearch/showFilters
+// - Edit filter chips per rail: filters[]
+// - Reorder rails by reordering RAILS_CONFIG
 // ==============================
 const RAILS_CONFIG = [
   {
@@ -85,7 +85,8 @@ const RAILS_CONFIG = [
       "Regenerative Economics",
       "Interoperability",
       "Governance in Practice"
-    ]
+    ],
+    "showSort": false
   },
   {
     "id": "metagov",
@@ -93,10 +94,13 @@ const RAILS_CONFIG = [
     "show": true,
     "showSearch": false,
     "showFilters": true,
-    "showSort": true,
-    "sortOptions": ["Last updated","Alphabetical"],
     "filters": [
       "All types"
+    ],
+    "showSort": true,
+    "sortOptions": [
+      "Last updated",
+      "Alphabetical"
     ]
   }
 ];
@@ -106,7 +110,7 @@ const OPENTEAM_PROJECTS = [
     "title": "Fair Tech Registry Collabathon",
     "subtitle": "Co-design and collaboration activities supporting the FAIR Tech Registry.",
     "status": "Complete",
-    "rawTheme": "Registry",
+    "theme": "Registry",
     "img": "assets/wg-project-card-fair-tech-registry-collabathon.jpg",
     "links": [
       {
@@ -124,7 +128,7 @@ const OPENTEAM_PROJECTS = [
     "title": "FAIR Tech Registry Documentation",
     "subtitle": "Developer-oriented documentation for the FAIR Tech Registry.",
     "status": "Active",
-    "rawTheme": "Docs",
+    "theme": "Docs",
     "img": "assets/wg-project-card-fair-tech-registry-documentation.jpg",
     "links": [
       {
@@ -142,7 +146,7 @@ const OPENTEAM_PROJECTS = [
     "title": "GLCDI Documentation",
     "subtitle": "Documentation hub for Grazing Lands Carbon Data Initiative.",
     "status": "Active",
-    "rawTheme": "Carbon data",
+    "theme": "Carbon data",
     "img": "assets/wg-project-card-glcdi-documentation.jpg",
     "links": [
       {
@@ -160,7 +164,7 @@ const OPENTEAM_PROJECTS = [
     "title": "Agricultural Data Use Documents",
     "subtitle": "Ag data use agreements and related reference documents.",
     "status": "Active",
-    "rawTheme": "Agreements",
+    "theme": "Agreements",
     "img": "assets/wg-project-card-agricultural-data-use-documents.jpg",
     "links": [
       {
@@ -178,7 +182,7 @@ const OPENTEAM_PROJECTS = [
     "title": "Code of Conduct",
     "subtitle": "Community expectations and participation guidelines.",
     "status": "Active",
-    "rawTheme": "Governance",
+    "theme": "Governance",
     "img": "assets/wg-project-card-code-of-conduct.jpg",
     "links": [
       {
@@ -196,7 +200,7 @@ const OPENTEAM_PROJECTS = [
     "title": "Marketplace Working Group",
     "subtitle": "Working group charter, glossary, and shared framing for marketplace efforts.",
     "status": "Archive",
-    "rawTheme": "Working group",
+    "theme": "Working group",
     "img": "assets/wg-project-card-marketplace-working-group.jpg",
     "links": [
       {
@@ -214,7 +218,7 @@ const OPENTEAM_PROJECTS = [
     "title": "PCSC farmOS Module",
     "subtitle": "Project space for a farmOS module and related implementation notes.",
     "status": "Archive",
-    "rawTheme": "farmOS",
+    "theme": "farmOS",
     "img": "assets/wg-project-card-pcsc-farmos-module.jpg",
     "links": [
       {
@@ -232,7 +236,7 @@ const OPENTEAM_PROJECTS = [
     "title": "Northeast Grazing and Soil Carbon Network",
     "subtitle": "Network hub for grazing and soil carbon collaboration materials.",
     "status": "Archive",
-    "rawTheme": "Soil carbon",
+    "theme": "Soil carbon",
     "img": "assets/wg-project-card-northeast-grazing-and-soil-carbon-network.jpg",
     "links": [
       {
@@ -250,7 +254,7 @@ const OPENTEAM_PROJECTS = [
     "title": "Ag Data Wallet",
     "subtitle": "Project site for Agricultural Data Wallet materials and outcomes.",
     "status": "Archive",
-    "rawTheme": "Data tools",
+    "theme": "Data tools",
     "img": "assets/wg-project-card-ag-data-wallet.jpg",
     "links": [
       {
@@ -268,7 +272,7 @@ const OPENTEAM_PROJECTS = [
     "title": "OpenTEAM Convention",
     "subtitle": "Repository folder for OpenTEAM Convention materials.",
     "status": "Active",
-    "rawTheme": "Governance",
+    "theme": "Governance",
     "img": "assets/wg-project-card-openteam-convention.jpg",
     "links": [
       {
@@ -282,7 +286,7 @@ const OPENTEAM_PROJECTS = [
     "title": "Documentation",
     "subtitle": "Top-level documentation repositories and related assets.",
     "status": "Active",
-    "rawTheme": "Docs",
+    "theme": "Docs",
     "img": "assets/wg-project-card-documentation.jpg",
     "links": [
       {
@@ -296,7 +300,7 @@ const OPENTEAM_PROJECTS = [
     "title": "USDA Cooperative Agreements",
     "subtitle": "Folder for cooperative agreement materials and related project work.",
     "status": "Archive",
-    "rawTheme": "Agreements",
+    "theme": "Agreements",
     "img": "assets/wg-project-card-usda-cooperative-agreements.jpg",
     "links": [
       {
@@ -311,256 +315,265 @@ const METAGOV_PROJECTS = [
   {
     "title": "The Protopian Fiction Prize",
     "href": "https://metagov.org/projects/protopian",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Atlas Computing",
     "href": "https://metagov.org/projects/atlas-computing",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Attention Economy",
     "href": "https://metagov.org/projects/attention-economy",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Governable Spacemakers Fellowship",
     "href": "https://metagov.org/projects/governable-spacemakers-fellowship",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Theory + Practice",
     "href": "https://metagov.org/projects/theory-plus-practice",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Cryptoeconomic Systems",
     "href": "https://metagov.org/projects/cryptoeconomic-systems",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Interoperable Deliberative Tools",
     "href": "https://metagov.org/projects/interop",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Mathematics for Governance Design",
     "href": "https://metagov.org/projects/mathematics-for-governance-design",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "KOI Pond",
     "href": "https://metagov.org/projects/koi-pond",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Constitutions of Web3",
     "href": "https://metagov.org/projects/constitutions-of-web3",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Cryptopolitics",
     "href": "https://metagov.org/projects/cryptopolitics",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "D20 Governance",
     "href": "https://metagov.org/projects/d20-governance",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "DAO Science",
     "href": "https://metagov.org/projects/dao-science",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "DAOchem",
     "href": "https://metagov.org/projects/daochem",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Digital Ethnography Reading Group",
     "href": "https://metagov.org/projects/digital-ethnography-reading-group",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Governance Ecologies",
     "href": "https://metagov.org/projects/governance-ecologies",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Governance Experience Design",
     "href": "https://metagov.org/projects/governance-experience-design",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Governance Research Round",
     "href": "https://metagov.org/projects/governance-research-round",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Governance Surfaces",
     "href": "https://metagov.org/projects/governance-surfaces",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Grant Innovation Lab",
     "href": "https://metagov.org/projects/grant-innovation-lab",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Groundwork Fellowship",
     "href": "https://metagov.org/projects/groundwork-fellowship",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "LARP Governance",
     "href": "https://metagov.org/projects/larp-governance",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Modpol",
     "href": "https://metagov.org/projects/modpol",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Modular Politics",
     "href": "https://metagov.org/projects/modular-politics",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Redwood Parliament",
     "href": "https://metagov.org/projects/redwood-parliament",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Validator Commons",
     "href": "https://metagov.org/projects/validator-commons",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "CommunityRule",
     "href": "https://metagov.org/projects/communityrule",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Composing Games into Complex Institutions",
     "href": "https://metagov.org/projects/composing-games-into-complex-institutions",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "AI Renaissance",
     "href": "https://metagov.org/projects/ai-renaissance",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Calm Technology",
     "href": "https://metagov.org/projects/calm-technology",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Govbase Dataset",
     "href": "https://metagov.org/projects/govbase-dataset",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Govbase Labs",
     "href": "https://metagov.org/projects/govbase-labs",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Metagov Gateway",
     "href": "https://metagov.org/projects/metagov-gateway",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "MetagovDAO",
     "href": "https://metagov.org/projects/metagovdao",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Metagov Seminar",
     "href": "https://metagov.org/projects/metagov-seminar",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "OSS Transitions",
     "href": "https://metagov.org/projects/oss-transitions",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "PolicyKit",
     "href": "https://metagov.org/projects/policykit",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Public AI",
     "href": "https://metagov.org/projects/public-ai",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Telescope",
     "href": "https://metagov.org/projects/telescope",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "Agreement Engine",
     "href": "https://metagov.org/projects/agreement-engine",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   },
   {
     "title": "DAOstar",
     "href": "https://metagov.org/projects/daostar",
-    "img": "https://www.google.com/s2/favicons?domain=metagov.org&sz=128",
+    "img": "",
     "desc": ""
   }
 ];
 
+// --- utilities
 function el(tag, attrs={}, children=[]) {
   const n = document.createElement(tag);
   Object.entries(attrs).forEach(([k,v])=>{ if(v===null || v===undefined) return; n.setAttribute(k,v); });
   children.forEach(c=>{ if(typeof c === "string") n.appendChild(document.createTextNode(c)); else if(c) n.appendChild(c); });
   return n;
+}
+
+function sortItems(scope, items){
+  const sel = document.querySelector(`.rail-sort[data-scope="${scope}"]`);
+  const mode = sel ? sel.value : "Last updated";
+  const arr = items.slice();
+  if(mode === "Alphabetical") arr.sort((a,b)=>(a.title||"").localeCompare(b.title||""));
+  return arr;
 }
 
 function renderRail(cfg, items) {
@@ -576,7 +589,6 @@ function renderRail(cfg, items) {
     });
     header.appendChild(sel);
   }
-
   section.appendChild(header);
 
   if(cfg.showSearch || cfg.showFilters) {
@@ -606,18 +618,21 @@ function renderRail(cfg, items) {
     section.appendChild(filterWrap);
   }
 
+  const railWrap = el("div", {class:"rail-wrap"});
+  const left = el("button", {class:"rail-arrow rail-arrow--left", type:"button", "aria-label":"Scroll left"}, ["‹"]);
+  const right = el("button", {class:"rail-arrow rail-arrow--right", type:"button", "aria-label":"Scroll right"}, ["›"]);
   const rail = el("div", {class:"rail", "data-scope":cfg.id});
-  items.forEach(item=>{
-    rail.appendChild(renderCard(cfg.id, item));
-  });
-  section.appendChild(rail);
+  items.forEach(item=> rail.appendChild(renderCard(cfg.id, item)));
+  railWrap.appendChild(left); railWrap.appendChild(rail); railWrap.appendChild(right);
+  section.appendChild(railWrap);
   return section;
 }
 
 function renderCard(scope, item) {
   if(scope === "openteam") {
-    const a = el("a", {class:"pcard__link", href:(item.links?.[0]?.href || "#"), target:"_blank", rel:"noopener"});
-    const card = el("article", {class:"pcard wg-project-card-lite", "data-theme": item.type || "All types"});
+    const href = (item.links?.[0]?.href || "#");
+    const a = el("a", {class:"pcard__link", href, target:"_blank", rel:"noopener"});
+    const card = el("article", {class:"pcard", "data-theme": item.type || "All types"});
     const cover = el("div", {class:"pcard__cover"}, [
       el("img", {src:item.img || "assets/wg-project-card-placeholder.jpg", alt:"", loading:"lazy",
         onerror:"this.onerror=null;this.src='assets/wg-project-card-placeholder.jpg';"})
@@ -626,19 +641,16 @@ function renderCard(scope, item) {
       el("div", {class:"pcard__title"}, [item.title]),
       el("div", {class:"pcard__sub"}, [item.subtitle || ""]),
       el("div", {class:"pcard__pills"}, [
-        item.status ? el("span", {class:"mini-pill"}, [item.status]) : null,
+        item.status ? el("span", {class:"mini-pill"}, ["Status: " + item.status]) : null,
         item.type ? el("span", {class:"mini-pill mini-pill--theme"}, [item.type]) : null,
       ].filter(Boolean))
     ]);
     const actions = el("div", {class:"pcard__actions"}, [
       el("span", {class:"pcard__arrow","aria-hidden":"true"}, ["↗"])
     ]);
-    a.appendChild(cover);
-    a.appendChild(meta);
-    a.appendChild(actions);
+    a.appendChild(cover); a.appendChild(meta); a.appendChild(actions);
     card.appendChild(a);
 
-    // expandable links
     if(item.links && item.links.length>1) {
       const more = el("details", {class:"pcard__more"}, [
         el("summary", {class:"pcard__morebtn"}, ["more"]),
@@ -652,33 +664,21 @@ function renderCard(scope, item) {
   }
 
   // metagov
-  const card = el("article", {class:"pcard metagov-card", "data-theme":"All types"});
+  const card = el("article", {class:"pcard metagov-card", "data-theme":"All types", "data-href": item.href});
   const a = el("a", {class:"pcard__link", href:item.href, target:"_blank", rel:"noopener"});
-  a.appendChild(el("div", {class:"pcard__cover pcard__cover--logo"}, [
-    el("img", {src:item.img, alt:"", loading:"lazy"})
-  ]));
-  a.appendChild(el("div", {class:"pcard__meta"}, [
+  const cover = el("div", {class:"pcard__cover"}, [
+    el("img", {src:item.img || "https://www.google.com/s2/favicons?domain=metagov.org&sz=128", alt:"", loading:"lazy"})
+  ]);
+  const meta = el("div", {class:"pcard__meta"}, [
     el("div", {class:"pcard__title"}, [item.title]),
-    el("div", {class:"pcard__sub"}, [item.desc || "metagov.org/projects"]),
-  ]));
-  a.appendChild(el("div", {class:"pcard__actions"}, [
+    el("div", {class:"pcard__sub"}, [item.desc || "Loading…"]),
+  ]);
+  const actions = el("div", {class:"pcard__actions"}, [
     el("span", {class:"pcard__arrow","aria-hidden":"true"}, ["↗"])
-  ]));
+  ]);
+  a.appendChild(cover); a.appendChild(meta); a.appendChild(actions);
   card.appendChild(a);
   return card;
-}
-
-
-function sortItems(scope, items){
-  const sel = document.querySelector(`.rail-sort[data-scope="${scope}"]`);
-  const mode = sel ? sel.value : "Last updated";
-  const arr = items.slice();
-  if(mode === "Alphabetical"){
-    arr.sort((a,b)=>(a.title||"").localeCompare(b.title||""));
-  } else {
-    // Last updated: keep original order as provided (closest to metagov default)
-  }
-  return arr;
 }
 
 function applyFilters(scope) {
@@ -698,126 +698,104 @@ function applyFilters(scope) {
   });
 }
 
+function wireArrows(){
+  document.querySelectorAll(".rail-wrap").forEach(w=>{
+    const rail = w.querySelector(".rail");
+    const left = w.querySelector(".rail-arrow--left");
+    const right = w.querySelector(".rail-arrow--right");
+    const step = ()=> Math.max(280, Math.floor(rail.clientWidth*0.85));
+    left.addEventListener("click", ()=> rail.scrollBy({left:-step(), behavior:"smooth"}));
+    right.addEventListener("click", ()=> rail.scrollBy({left:step(), behavior:"smooth"}));
+    const update=()=>{
+      const max = rail.scrollWidth - rail.clientWidth - 2;
+      left.disabled = rail.scrollLeft <= 2;
+      right.disabled = rail.scrollLeft >= max;
+    };
+    rail.addEventListener("scroll", update, {passive:true});
+    window.addEventListener("resize", update);
+    update();
+  });
+}
+
+// --- Metagov enrichment (img + description)
+const METAGOV_CACHE_KEY = "metagovProjectCache_v1";
+function loadCache(){
+  try { return JSON.parse(localStorage.getItem(METAGOV_CACHE_KEY) || "{}"); } catch(e){ return {}; }
+}
+function saveCache(obj){ try { localStorage.setItem(METAGOV_CACHE_KEY, JSON.stringify(obj)); } catch(e){} }
+
+async function enrichMetagov() {
+  const cache = loadCache();
+  const cards = Array.from(document.querySelectorAll(".metagov-card"));
+  for (const card of cards) {
+    const href = card.getAttribute("data-href");
+    if(!href) continue;
+    const imgEl = card.querySelector(".pcard__cover img");
+    const descEl = card.querySelector(".pcard__sub");
+    if(cache[href]) {
+      if(cache[href].img) imgEl.src = cache[href].img;
+      if(cache[href].desc) descEl.textContent = cache[href].desc;
+      continue;
+    }
+    try {
+      const res = await fetch(href, {mode:"cors"});
+      const text = await res.text();
+      const doc = new DOMParser().parseFromString(text, "text/html");
+      const ogImg = doc.querySelector('meta[property="og:image"]')?.getAttribute("content") || "";
+      const ogDesc = doc.querySelector('meta[property="og:description"]')?.getAttribute("content") ||
+                     doc.querySelector('meta[name="description"]')?.getAttribute("content") || "";
+      const heroP = doc.querySelector("main p")?.textContent?.trim() || "";
+      const desc = (ogDesc || heroP).replace(/\s+/g," ").slice(0, 140);
+      const img = ogImg;
+      if(img) imgEl.src = img;
+      if(desc) descEl.textContent = desc;
+      cache[href] = {img, desc};
+      saveCache(cache);
+    } catch(e) {
+      // leave fallback
+      descEl.textContent = "metagov.org/projects";
+    }
+  }
+}
+
 function mount() {
   const root = document.getElementById("rails-root");
   root.innerHTML = "";
   RAILS_CONFIG.forEach(cfg=>{
     if(!cfg.show) return;
-    const rawItems = cfg.id === "openteam" ? OPENTEAM_PROJECTS : METAGOV_PROJECTS;
-    const items = sortItems(cfg.id, rawItems);
+    const raw = cfg.id === "openteam" ? OPENTEAM_PROJECTS : METAGOV_PROJECTS;
+    const items = sortItems(cfg.id, raw);
     root.appendChild(renderRail(cfg, items));
   });
-  // wire events
+  wireArrows();
+
   document.addEventListener("click", (e)=>{
     const chip = e.target.closest(".chip");
-    if(!chip) return;
-    const chipsWrap = chip.closest(".filter-chips");
-    if(!chipsWrap) return;
-    chipsWrap.querySelectorAll(".chip").forEach(c=>c.classList.remove("is-active"));
-    chip.classList.add("is-active");
-    applyFilters(chipsWrap.getAttribute("data-scope"));
+    if(chip) {
+      const wrap = chip.closest(".filter-chips");
+      if(wrap) {
+        wrap.querySelectorAll(".chip").forEach(c=>c.classList.remove("is-active"));
+        chip.classList.add("is-active");
+        applyFilters(wrap.getAttribute("data-scope"));
+      }
+    }
+  });
+  document.addEventListener("input", (e)=>{
+    const inp = e.target.closest(".filter-search");
+    if(inp) applyFilters(inp.getAttribute("data-scope"));
   });
   document.addEventListener("change", (e)=>{
     const sel = e.target.closest(".rail-sort");
-    if(sel){
-      mount();
-      return;
-    }
+    if(sel) mount();
   });
-
-  document.addEventListener("input", (e)=>{
-    const inp = e.target.closest(".filter-search");
-    if(!inp) return;
-    applyFilters(inp.getAttribute("data-scope"));
-  });
-  // initial
   applyFilters("openteam");
   applyFilters("metagov");
-}
-
-
-async function enrichMetagovCards(){
-  const scope = "metagov";
-  const rail = document.querySelector(`.rail[data-scope="${scope}"]`);
-  if(!rail) return;
-
-  const cacheKey = (href)=>`metagov_enrich_${href}`;
-  const fromCache = (href)=>{
-    try{ return JSON.parse(localStorage.getItem(cacheKey(href))||"null"); }catch(e){ return null; }
-  };
-  const toCache = (href, obj)=>{
-    try{ localStorage.setItem(cacheKey(href), JSON.stringify(obj)); }catch(e){}
-  };
-
-  const cards = Array.from(rail.querySelectorAll(".metagov-card"));
-  const jobs = cards.map(card=>{
-    const a = card.querySelector(".pcard__link");
-    const href = a ? a.getAttribute("href") : "";
-    return {card, href};
-  }).filter(j=>j.href && j.href.includes("metagov.org/projects/"));
-
-  // simple concurrency limiter
-  const limit = 6;
-  let idx = 0;
-
-  async function worker(){
-    while(idx < jobs.length){
-      const job = jobs[idx++];
-      const {card, href} = job;
-      const cached = fromCache(href);
-      if(cached && (cached.img || cached.desc)){
-        applyToCard(card, cached);
-        continue;
-      }
-      try{
-        const proxyUrl = `https://r.jina.ai/${href}`;
-        const res = await fetch(proxyUrl);
-        if(!res.ok) continue;
-        const txt = await res.text();
-
-        // image: first metagov media asset that looks like a hero image
-        const imgMatch = txt.match(/https?:\/\/metagov\.org\/media\/pages\/projects\/[^\s"')]+?\.(?:jpg|jpeg|png|webp)/i);
-        // description: try to capture line after 'DESCRIPTION'
-        let desc = "";
-        const descMatch = txt.match(/DESCRIPTION\s*\n+([^\n]+)\n/i);
-        if(descMatch && descMatch[1]) desc = descMatch[1].trim();
-        if(!desc){
-          // fallback: look for '##### DESCRIPTION' pattern
-          const alt = txt.match(/#####\s*DESCRIPTION\s*\n+([^\n]+)\n/i);
-          if(alt && alt[1]) desc = alt[1].trim();
-        }
-        const payload = {
-          img: imgMatch ? imgMatch[0] : "",
-          desc
-        };
-        if(payload.img || payload.desc){
-          toCache(href, payload);
-          applyToCard(card, payload);
-        }
-      }catch(e){
-        // ignore
-      }
-    }
-  }
-
-  function applyToCard(card, payload){
-    if(payload.img){
-      const imgEl = card.querySelector(".pcard__cover img");
-      if(imgEl) imgEl.src = payload.img;
-    }
-    if(payload.desc){
-      const sub = card.querySelector(".pcard__sub");
-      if(sub) sub.textContent = payload.desc;
-    }
-  }
-
-  const workers = Array.from({length: Math.min(limit, jobs.length)}, ()=>worker());
-  await Promise.all(workers);
+  enrichMetagov();
 }
 
 mount();
-// hydrate metagov images + descriptions (cached in localStorage)
-enrichMetagovCards();
 </script>
+
+<script src="script.js"></script>
 </body>
 </html>

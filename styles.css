@@ -1036,3 +1036,50 @@ h3{font-size: 22px; margin:0 0 10px 0;}
 .filter-chips{display:flex;gap:8px;flex-wrap:wrap}
 .chip{padding:8px 10px;border-radius:999px;border:1px solid rgba(0,70,40,0.22);background:#fff;color:#0b1b12;font-weight:900;font-size:12px;cursor:pointer}
 .chip.is-active{background:rgba(18,120,70,0.12);border-color:rgba(18,120,70,0.45)}
+
+
+/* =========================
+   Projects rails (editable config page)
+   ========================= */
+.hero--projects{padding:34px 0 18px 0;}
+.hero__row{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.hero__title{margin:0 0 8px 0;}
+.hero__lede{margin:0;max-width:72ch}
+
+.rail-section{margin:22px 0 28px 0;}
+.rail-header{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:10px}
+.rail-title{margin:0;font-size:20px}
+
+.rail-filter{margin:10px 0 14px 0;}
+.filter-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.filter-search{flex:1;min-width:240px;padding:10px 12px;border-radius:12px;border:1px solid rgba(0,0,0,0.14);background:#fff;color:#102016;font-weight:800}
+.filter-chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:8px 10px;border-radius:999px;border:1px solid rgba(0,70,40,0.22);background:#fff;color:#0b1b12;font-weight:900;font-size:12px;cursor:pointer}
+.chip.is-active{background:rgba(18,120,70,0.12);border-color:rgba(18,120,70,0.45)}
+
+.rail{display:flex;gap:14px;overflow:auto;padding-bottom:6px;scroll-snap-type:x mandatory}
+.rail::-webkit-scrollbar{height:10px}
+.pcard{min-width:340px;max-width:340px;scroll-snap-align:start;border-radius:18px;border:2px solid rgba(0,70,40,0.55);background:#fff;box-shadow:0 10px 18px rgba(0,0,0,0.10);overflow:hidden}
+.pcard__link{display:grid;grid-template-columns:110px 1fr auto;gap:12px;align-items:stretch;padding:12px;text-decoration:none;color:inherit}
+.pcard__cover{width:110px;height:150px;border-radius:14px;overflow:hidden;border:1px solid rgba(0,0,0,0.12);background:rgba(0,0,0,0.03)}
+.pcard__cover img{width:100%;height:100%;object-fit:cover;display:block}
+.pcard__cover--logo{height:110px;width:110px;display:flex;align-items:center;justify-content:center}
+.pcard__cover--logo img{width:64px;height:64px;object-fit:contain}
+.pcard__meta{min-width:0}
+.pcard__title{font-weight:900;line-height:1.15;margin-top:2px}
+.pcard__sub{margin-top:6px;opacity:0.85;line-height:1.25;font-size:13px}
+.pcard__pills{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.mini-pill{font-size:11px;font-weight:900;padding:6px 8px;border-radius:999px;border:1px solid rgba(0,70,40,0.25);background:rgba(18,120,70,0.08)}
+.mini-pill--theme{background:rgba(0,0,0,0.04);border-color:rgba(0,0,0,0.15)}
+.pcard__actions{display:flex;align-items:flex-start;justify-content:flex-end}
+.pcard__arrow{font-weight:900}
+
+.pcard__more{padding:0 12px 12px 12px}
+.pcard__morebtn{cursor:pointer;font-weight:900}
+.pcard__morebody{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+
+@media (max-width:520px){
+  .pcard{min-width:300px;max-width:300px}
+  .pcard__link{grid-template-columns:96px 1fr auto}
+  .pcard__cover{width:96px;height:132px}
+}

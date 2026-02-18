@@ -1083,3 +1083,13 @@ h3{font-size: 22px; margin:0 0 10px 0;}
   .pcard__link{grid-template-columns:96px 1fr auto}
   .pcard__cover{width:96px;height:132px}
 }
+
+/* Rail sort dropdown (metagov-style) */
+.rail-sort{
+  padding:8px 10px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,0.14);
+  background:#fff;
+  color:#102016;
+  font-weight:900;
+}

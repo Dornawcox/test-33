@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>OpenTEAM — Projects</title>
+<meta content="OpenTEAM canonical source texts: books, papers, tools, and community inspirations that shaped the ecosystem." name="description"/>
+<meta content="OpenTEAM Canonical Source Texts" property="og:title"/>
+<meta content="Books and sources that shaped OpenTEAM — browse by theme." property="og:description"/>
+<meta content="assets/bg_malawi.jpg" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&amp;family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&amp;family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
+<style>
+  /* Featured */
+  .featured-grid{display:grid;grid-template-columns:180px 1fr;gap:16px;align-items:start}
+  @media (max-width: 720px){.featured-grid{grid-template-columns:1fr}}
+  .featured-cover{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.12);background:rgba(0,0,0,0.22)}
+  .featured-cover img{width:100%;height:100%;display:block;object-fit:cover}
+  .featured-title{margin:6px 0 6px 0; font-size:20px; line-height:1.2}
+  .featured-sub{opacity:.90; font-size:13px}
+  .featured-meta .muted, .featured-callout .muted{color:rgba(255,255,255,0.92) !important; opacity:1 !important}
+  .tagrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .tag{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.18);background:rgba(0,0,0,0.18);font-size:12px;opacity:.92}
+
+  /* Rails */
+  .theme-block{margin-top:18px}
+  .rail-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10);border-radius:18px;padding:14px;position:relative}
+  .rail-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:10px}
+  .rail-title{margin:0;font-size:16px}
+  .rail-nav{display:none}
+  .rail{display:flex;gap:12px;overflow:auto;padding-bottom:6px;scroll-snap-type:x proximity;scroll-behavior:smooth}
+  .rail::-webkit-scrollbar{height:10px}
+  .rail::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.18);border-radius:999px}
+
+  /* Desktop rail arrows */
+  @media (min-width: 900px){
+    .rail-nav{display:flex;gap:8px}
+    .rail-arrow{width:34px;height:34px;border-radius:999px;border:1px solid rgba(255,255,255,0.18);background:rgba(0,0,0,0.30);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+    .rail-arrow:hover{border-color:rgba(255,255,255,0.35);background:rgba(0,0,0,0.38)}
+    .rail-arrow svg{width:16px;height:16px;fill:#fff;opacity:.95}
+  }
+
+  /* Source card */
+  .scard{min-width:260px;max-width:320px;scroll-snap-align:start;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.12);background:rgba(0,0,0,0.22);transition:transform .12s ease,border-color .12s ease;position:relative}
+  .scard:hover{transform:translateY(-2px);border-color:rgba(255,255,255,0.28)}
+  .shead{display:grid;grid-template-columns:86px 1fr;gap:10px;padding:12px 12px 10px 12px;align-items:start}
+  .scover{width:86px;height:120px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.12);background:linear-gradient(135deg, rgba(255,255,255,0.10), rgba(0,0,0,0.20))}
+  .scover img{width:100%;height:100%;object-fit:cover;display:block}
+  .smeta{min-width:0}
+  .stitle{margin:0 0 6px 0;font-size:14px;line-height:1.25}
+  .ssub{font-size:12px;opacity:.82}
+
+  .sactions{display:flex;gap:8px;flex-wrap:wrap;padding:0 12px 12px 12px}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:999px;border:1px solid rgba(255,255,255,0.18);background:rgba(0,0,0,0.20);color:var(--text);text-decoration:none;font-weight:700;font-size:12px}
+  .pill:hover{border-color:rgba(255,255,255,0.35);background:rgba(0,0,0,0.26)}
+  .pill.secondary{font-weight:800;opacity:.92}
+
+  /* Expansion */
+  .detail{border-top:1px solid rgba(255,255,255,0.10);padding:10px 12px 40px 12px;display:none}
+  .detail.open{display:block}
+  .detail p{margin:0 0 10px 0;font-size:12.5px;line-height:1.45;opacity:.95}
+  .stags{display:flex;flex-wrap:wrap;gap:6px}
+  .stag{font-size:11px;opacity:.92;border:1px solid rgba(255,255,255,0.14);background:rgba(0,0,0,0.16);border-radius:999px;padding:5px 8px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  /* Gratitude */
+  .gratitude{position:absolute;right:10px;bottom:10px;display:inline-flex;align-items:center;gap:6px}
+  .gbtn{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:999px;border:1px solid rgba(255,255,255,0.18);background:rgba(0,0,0,0.30);cursor:pointer}
+  .gbtn:hover{border-color:rgba(255,255,255,0.35);background:rgba(0,0,0,0.38)}
+  .gbtn svg{width:16px;height:16px;fill:#fff;opacity:.95}
+  .gcount{font-size:12px;opacity:.92;min-width:18px;text-align:left}
+
+  /* Join line */
+  .join-once{margin-top:12px;font-size:13px;opacity:.88}
+  .join-once a{color:var(--text);font-weight:900;text-decoration:none}
+  .join-once a:hover{text-decoration:underline}
+
+  /* Featured descriptor higher contrast */
+  .featured-desc{
+    color: rgba(0,0,0,0.88) !important;
+    opacity: 1 !important;
+    background: rgba(255,255,255,0.86);
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(0,0,0,0.10);
+  }
+
+
+    /* Nominate bubble high contrast */
+  .nominate-bubble{
+    background: rgba(255,255,255,0.96) !important;
+    border: 1px solid rgba(0,0,0,0.16) !important;
+    color: rgba(0,0,0,0.92) !important;
+  }
+  .nominate-bubble .callout-title{
+    color: rgba(0,0,0,0.92) !important;
+  }
+  .nominate-bubble p,
+  .nominate-bubble .muted,
+  .nominate-bubble strong{
+    color: rgba(0,0,0,0.92) !important;
+    opacity: 1 !important;
+  }
+  .nominate-bubble a{
+    color: rgba(0,0,0,0.95) !important;
+    text-decoration: underline !important;
+    font-weight: 900 !important;
+  }
+
+
+  /* Rail wrap + end-position arrows (like index/videos) */
+  .rail-wrap{position:relative}
+  .rail-arrow-end{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:38px;height:38px;border-radius:999px;
+    border:1px solid rgba(255,255,255,0.20);
+    background:rgba(0,0,0,0.35);
+    cursor:pointer;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:3;
+  }
+  .rail-arrow-end:hover{border-color:rgba(255,255,255,0.40);background:rgba(0,0,0,0.45)}
+  .rail-arrow-end svg{width:18px;height:18px;fill:#fff;opacity:.95}
+  .rail-arrow-left{left:-6px}
+  .rail-arrow-right{right:-6px}
+  @media (min-width: 900px){ .rail-arrow-end{display:flex} .rail{padding:0 26px 6px 26px;} }
+
+
+
+/* Projects page tweaks */
+.scard{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:start;}
+.scard-cover{display:block;width:120px;height:170px;border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,0.10);}
+.scard-cover img{width:100%;height:100%;object-fit:cover;display:block;}
+.scard-title{font-weight:800;font-size:16px;line-height:1.15;margin-bottom:6px;color:#0b2b1a;}
+.scard-sub{color:rgba(0,0,0,0.72);line-height:1.25;margin-bottom:8px;}
+.scard-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
+.more-btn{border:1px solid rgba(0,0,0,0.12);background:#fff;border-radius:999px;padding:6px 10px;font-weight:700;cursor:pointer;}
+.more-panel{margin-top:10px;}
+.more-links{display:flex;flex-wrap:wrap;gap:10px;}
+.more-links .scard-link{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(0,0,0,0.12);background:#fff;border-radius:999px;padding:6px 10px;text-decoration:none;color:#0b2b1a;font-weight:700;}
+@media (max-width: 640px){.scard{grid-template-columns:100px 1fr}.scard-cover{width:100px;height:150px}}
+
+.rail-filters{display:flex; gap:10px; align-items:center; margin-top:10px; flex-wrap:wrap;}
+.rail-search{padding:10px 12px; border-radius:999px; border:1px solid rgba(31,90,58,0.35); min-width:220px;}
+.rail-select{padding:10px 12px; border-radius:999px; border:1px solid rgba(31,90,58,0.35); background:#fff;}
+.nominate-bubble, .footer-bubble{background:#ffffff !important; border:2px solid #1f5a3a !important;}
+.nominate-bubble *, .footer-bubble *{color:#0b2b1a !important;}
+</style>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav-shell" role="banner">
+<button aria-controls="drawer" aria-expanded="false" class="menu-button" id="menuButton">
+<span aria-hidden="true" class="menu-icon"><span></span></span>
+<span class="menu-label">MENU</span>
+</button>
+<div class="nav-title">
+<div class="nav-title-text">Open Technology Ecosystem for Agricultural Management</div>
+</div>
+<div aria-hidden="true" class="nav-logo">
+<img alt="" src="assets/openteam_logo.svg"/>
+</div>
+</header>
+<aside aria-hidden="true" class="drawer" id="drawer">
+<div class="drawer-inner">
+<div class="drawer-top">
+<div class="drawer-mark">
+<img alt="OpenTEAM logo" src="assets/openteam_logo.svg"/>
+</div>
+<div class="drawer-vertical">OpenTEAM</div>
+<button aria-label="Close menu" class="drawer-close" id="drawerClose">✕</button>
+</div>
+<nav aria-label="Site" class="drawer-links">
+<a class="drawer-link" href="index.html#home">HOME</a>
+<a class="drawer-link" href="index.html#initiatives">INITIATIVES</a>
+<a class="drawer-link" href="index.html#pilots">COLLABATHONS</a>
+<a class="drawer-link" href="index.html#convenings">CONVENINGS</a>
+<a class="drawer-link" href="index.html#library">TOOLS, COMMUNITIES &amp; PLATFORMS</a>
+<a class="drawer-link" href="videos.html">VIDEOS</a>
+<a class="drawer-link" href="index.html#reading">INSPIRATIONS</a>
+<a aria-current="page" class="drawer-link" href="canonical-source-texts.html">CANONICAL SOURCE TEXTS</a>
+<a class="drawer-link" href="index.html#join">JOIN</a>
+<a class="drawer-link" href="licenses.html">LICENSES</a>
+</nav>
+<div class="drawer-meta">
+<div class="drawer-meta-title">Contact</div>
+<a class="drawer-meta-link" href="https://www.hylo.com/groups/openteamgroups/openteam" rel="noopener" target="_blank">Connect on Hylo ↗</a>
+</div>
+</div>
+</aside>
+<div aria-hidden="true" class="scrim" id="scrim"></div>
+<main id="main">
+<section class="section" id="sources-page">
+<div class="container">
+<div class="section-head">
+<h2>Canonical source texts</h2>
+</div>
+<!-- Featured book -->
+<div class="callout featured-callout" style="margin-top: 14px;"><a class="btn btn-primary" href="index.html">Back to index ↗</a><span></span><a class="btn btn-ghost" href="canonical-source-texts-updated-v9.html">Open the library ↗</a></div>
+<!-- Theme rails -->
+<div class="callout nominate-bubble" style="margin-top: 18px;background: rgba(255,255,255,0.96);border:1px solid rgba(0,0,0,0.16);">
+<div class="callout-title" style="color:rgba(0,0,0,0.92);">Projects</div>
+<div class="callout-body">
+<p style="margin:0;color:rgba(0,0,0,0.92) !important;opacity:1 !important;">
+<strong>Don't see a project or resource that should be here?  Join to update and contribute projects and documentation</strong>
+              Join to nominate the books, tools, events and people that were important to you and the evolution of your efforts.
+              <a href="index.html#join" style="color:rgba(0,0,0,0.95) !important;text-decoration:underline;font-weight:900;">Join ↗</a>
+</p>
+</div>
+</div>
+<div id="themeRails" style="margin-top: 16px;"></div>
+</div>
+</section>
+<div class="callout" style="margin-top: 18px;">
+</div>
+<div id="themes"></div></main>
+<footer class="footer">
+<div class="container footer-grid">
+<div class="footer-brand">
+<img alt="OpenTEAM logo" class="footer-logo" src="assets/openteam_logo.svg"/>
+<div>
+<div class="footer-title">OpenTEAM</div>
+<div class="footer-subtitle">Open Technology Ecosystem for Agricultural Management</div>
+<div class="footer-meta">© <span id="year"></span> OpenTEAM — Built for GitLab Pages / GitHub Pages</div>
+<div class="footer-meta small">Design attribution: inspired by Open Environmental Data Project (openenvironmentaldata.org).</div>
+</div>
+</div>
+<div class="footer-links">
+<a href="index.html#home">Home</a>
+<a href="index.html#initiatives">Our Work</a>
+<a href="index.html#pilots">Collabathons</a>
+<a href="index.html#convenings">Convenings</a>
+<a href="index.html#library">Library</a>
+<a href="videos.html">Videos</a>
+<a href="index.html#reading">Inspirations</a>
+<a href="canonical-source-texts.html">Canonical Source Texts</a>
+<a href="index.html#join">Join</a>
+<a href="licenses.html">Licenses</a>
+</div>
+</div>
+</footer>
+<script>
+const OPENTEAM_FILTERS = [
+  "All types",
+  "Data Trust Development",
+  "Commons & Governance",
+  "Data Sovereignty",
+  "Regenerative Economics",
+  "Interoperability",
+  "Governance in Practice"
+];
+
+  // ==============================
+  // OpenTEAM Projects (edit/add/remove here in GitHub)
+  // - Reorder rails by editing THEMES_ORDER
+  // - Reorder cards inside a rail by reordering its array
+  // ==============================
+
+  const THEMES_ORDER = ["All OpenTEAM Projects", "Agroecology & Regenerative Agriculture data in practice", "Commons & Governance", "Ethical AI & Data Stewardship", "Regenerative Economics", "Data & Interoperability", "Governance in Practice", "Metagov Projects"];
+  const THEMES = {"All OpenTEAM Projects": [{"title": "GLCDI Documentation", "subtitle": "Documentation hub for Grazing Lands Carbon Data Initiative.", "pills": ["Status: Active", "Theme: Carbon data"], "links": [{"label": "Project site ↗", "href": "https://openteamag.gitlab.io/codesign/grazingdata/"}, {"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/codesign/grazingdata"}], "cover": "assets/wg-project-card-glcdi-documentation.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" fill=\"none\" r=\"9\" stroke=\"currentColor\" stroke-width=\"2\"></circle><path d=\"M3 12h18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18\" fill=\"none\" opacity=\".85\" stroke=\"currentColor\" stroke-width=\"2\"></path></svg>", "primary": "https://openteamag.gitlab.io/codesign/grazingdata/", "more": "Project site ↗ GitLab ↗"}, {"title": "Northeast Grazing and Soil Carbon Network", "subtitle": "Network hub for grazing and soil carbon collaboration materials.", "pills": ["Status: Archive", "Theme: Soil carbon"], "links": [{"label": "Project site ↗", "href": "https://openteamag.gitlab.io/codesign/grazing-SC-network/"}, {"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/codesign/grazing-SC-network"}], "cover": "assets/wg-project-card-northeast-grazing-and-soil-carbon-network.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M20 4c-8 0-14 6-14 14 8 0 14-6 14-14z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M6 18c3-5 7-8 14-10\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path></svg>", "primary": "https://openteamag.gitlab.io/codesign/grazing-SC-network/", "more": "Project site ↗ GitLab ↗"}, {"title": "No projects yet", "subtitle": "This category is ready for the next working group project.", "cover": "assets/wg-project-card-placeholder.jpg", "pills": ["Systems Thinking & Complexity"], "links": [{"label": "Back to index ↗", "href": "index.html#pilots"}], "primary": "index.html#pilots"}, {"title": "No projects yet", "subtitle": "This category is ready for the next working group project.", "cover": "assets/wg-project-card-placeholder.jpg", "pills": ["Long History and Visionary Works"], "links": [{"label": "Back to index ↗", "href": "index.html#pilots"}], "primary": "index.html#pilots"}, {"title": "Code of Conduct", "subtitle": "Community expectations and participation guidelines.", "pills": ["Status: Active", "Theme: Governance"], "links": [{"label": "Project site ↗", "href": "https://openteamag.gitlab.io/codesign/code-of-conduct/"}, {"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/codesign/code-of-conduct"}], "cover": "assets/wg-project-card-code-of-conduct.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M12 3l8 4v6c0 5-3.5 8-8 8s-8-3-8-8V7z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M9 12l2 2 4-5\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path></svg>", "primary": "https://openteamag.gitlab.io/codesign/code-of-conduct/", "more": "Project site ↗ GitLab ↗"}, {"title": "OpenTEAM Convention", "subtitle": "Repository folder for OpenTEAM Convention materials.", "pills": ["Status: Active", "Theme: Governance"], "links": [{"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/ag-data-wallet/openteam-convention"}], "cover": "assets/wg-project-card-openteam-convention.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M12 2l3 6 7 1-5 5 1 8-6-3-6 3 1-8-5-5 7-1z\" fill=\"none\" stroke=\"currentColor\" stroke-linejoin=\"round\" stroke-width=\"2\"></path></svg>", "primary": "https://gitlab.com/OpenTEAMAg/ag-data-wallet/openteam-convention", "more": "GitLab ↗"}, {"title": "Ag Data Wallet", "subtitle": "Project site for Agricultural Data Wallet materials and outcomes.", "pills": ["Status: Archive", "Theme: Data tools"], "links": [{"label": "Project site ↗", "href": "https://openteamag.gitlab.io/agricultural-data-wallet/"}, {"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/ag-data-wallet"}], "cover": "assets/wg-project-card-ag-data-wallet.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M4 7h16v12H4z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M4 7l2-3h14\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path><path d=\"M16 13h4v3h-4a2 2 0 0 1 0-3z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path></svg>", "primary": "https://openteamag.gitlab.io/agricultural-data-wallet/", "more": "Project site ↗ GitLab ↗"}, {"title": "Marketplace Working Group", "subtitle": "Working group charter, glossary, and shared framing for marketplace efforts.", "pills": ["Status: Archive", "Theme: Working group"], "links": [{"label": "Project site ↗", "href": "https://openteamag.gitlab.io/codesign/markets/"}, {"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/codesign/markets"}], "cover": "assets/wg-project-card-marketplace-working-group.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M4 9h16l-1 12H5z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M7 9V6a5 5 0 0 1 10 0v3\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path><path d=\"M8 13h.01M12 13h.01M16 13h.01\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"3\"></path></svg>", "primary": "https://openteamag.gitlab.io/codesign/markets/", "more": "Project site ↗ GitLab ↗"}, {"title": "Fair Tech Registry Collabathon", "subtitle": "Co-design and collaboration activities supporting the FAIR Tech Registry.", "pills": ["Status: Complete", "Theme: Registry"], "links": [{"label": "Project site ↗", "href": "https://openteamag.gitlab.io/codesign/fair-registry/"}, {"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/codesign/fair-registry"}], "cover": "assets/wg-project-card-fair-tech-registry-collabathon.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M7 7h10v10H7z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M4 4h16v16H4z\" fill=\"none\" opacity=\".7\" stroke=\"currentColor\" stroke-width=\"1.6\"></path></svg>", "primary": "https://openteamag.gitlab.io/codesign/fair-registry/", "more": "Project site ↗ GitLab ↗"}, {"title": "PCSC farmOS Module", "subtitle": "Project space for a farmOS module and related implementation notes.", "pills": ["Status: Archive", "Theme: farmOS"], "links": [{"label": "Project site ↗", "href": "https://openteamag.gitlab.io/codesign/pcsc/"}, {"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/codesign/pcsc"}], "cover": "assets/wg-project-card-pcsc-farmos-module.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M9 3v6M15 3v6\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path><path d=\"M7 9h10v3a5 5 0 0 1-10 0z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M12 17v4\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path></svg>", "primary": "https://openteamag.gitlab.io/codesign/pcsc/", "more": "Project site ↗ GitLab ↗"}, {"title": "No projects yet", "subtitle": "This category is ready for the next working group project.", "cover": "assets/wg-project-card-placeholder.jpg", "pills": ["Indigenous and Ancestral Knowledge"], "links": [{"label": "Back to index ↗", "href": "index.html#pilots"}], "primary": "index.html#pilots"}, {"title": "FAIR Tech Registry Documentation", "subtitle": "Developer-oriented documentation for the FAIR Tech Registry.", "pills": ["Status: Active", "Theme: Docs"], "links": [{"label": "Project site ↗", "href": "https://openteamag.gitlab.io/fair-tech-registry/devs/"}, {"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/fair-tech-registry"}], "cover": "assets/wg-project-card-fair-tech-registry-documentation.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M7 3h7l3 3v15H7z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M14 3v4h4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M9 12h6M9 15h6M9 18h6\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path></svg>", "primary": "https://openteamag.gitlab.io/fair-tech-registry/devs/", "more": "Project site ↗ GitLab ↗"}, {"title": "Agricultural Data Use Documents", "subtitle": "Ag data use agreements and related reference documents.", "pills": ["Status: Active", "Theme: Agreements"], "links": [{"label": "Project site ↗", "href": "https://openteam-agreements.community/"}, {"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/agreements"}], "cover": "assets/wg-project-card-agricultural-data-use-documents.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M7 3h10v18H7z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M9 7h6M9 11h6M9 15h4\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path><path d=\"M14 17l2 2 4-4\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path></svg>", "primary": "https://openteam-agreements.community/", "more": "Project site ↗ GitLab ↗"}, {"title": "Documentation", "subtitle": "Top-level documentation repositories and related assets.", "pills": ["Status: Active", "Theme: Docs"], "links": [{"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/documentation"}], "cover": "assets/wg-project-card-documentation.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M6 4h10a2 2 0 0 1 2 2v14H8a2 2 0 0 0-2 2z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M6 4v16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M8 8h8\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path></svg>", "primary": "https://gitlab.com/OpenTEAMAg/documentation", "more": "GitLab ↗"}, {"title": "USDA Cooperative Agreements", "subtitle": "Folder for cooperative agreement materials and related project work.", "pills": ["Status: Archive", "Theme: Agreements"], "links": [{"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/usda-cooperative-agreements"}], "cover": "assets/wg-project-card-usda-cooperative-agreements.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M8 12l2 2c1 1 3 1 4 0l4-4\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path><path d=\"M3 12l5-5 4 4-5 5H3z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M21 12l-5-5-4 4 5 5h4z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path></svg>", "primary": "https://gitlab.com/OpenTEAMAg/usda-cooperative-agreements", "more": "GitLab ↗"}, {"title": "No projects yet", "subtitle": "This category is ready for the next working group project.", "cover": "assets/wg-project-card-placeholder.jpg", "pills": ["Speculative Science Fiction"], "links": [{"label": "Back to index ↗", "href": "index.html#pilots"}], "primary": "index.html#pilots"}], "Agroecology & Regenerative Agriculture data in practice": [{"title": "GLCDI Documentation", "subtitle": "Documentation hub for Grazing Lands Carbon Data Initiative.", "pills": ["Status: Active", "Theme: Carbon data"], "links": [{"label": "Project site ↗", "href": "https://openteamag.gitlab.io/codesign/grazingdata/"}, {"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/codesign/grazingdata"}], "cover": "assets/wg-project-card-glcdi-documentation.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" fill=\"none\" r=\"9\" stroke=\"currentColor\" stroke-width=\"2\"></circle><path d=\"M3 12h18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18\" fill=\"none\" opacity=\".85\" stroke=\"currentColor\" stroke-width=\"2\"></path></svg>", "primary": "https://openteamag.gitlab.io/codesign/grazingdata/", "more": "Project site ↗ GitLab ↗"}, {"title": "Northeast Grazing and Soil Carbon Network", "subtitle": "Network hub for grazing and soil carbon collaboration materials.", "pills": ["Status: Archive", "Theme: Soil carbon"], "links": [{"label": "Project site ↗", "href": "https://openteamag.gitlab.io/codesign/grazing-SC-network/"}, {"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/codesign/grazing-SC-network"}], "cover": "assets/wg-project-card-northeast-grazing-and-soil-carbon-network.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M20 4c-8 0-14 6-14 14 8 0 14-6 14-14z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M6 18c3-5 7-8 14-10\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path></svg>", "primary": "https://openteamag.gitlab.io/codesign/grazing-SC-network/", "more": "Project site ↗ GitLab ↗"}], "Commons & Governance": [{"title": "Code of Conduct", "subtitle": "Community expectations and participation guidelines.", "pills": ["Status: Active", "Theme: Governance"], "links": [{"label": "Project site ↗", "href": "https://openteamag.gitlab.io/codesign/code-of-conduct/"}, {"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/codesign/code-of-conduct"}], "cover": "assets/wg-project-card-code-of-conduct.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M12 3l8 4v6c0 5-3.5 8-8 8s-8-3-8-8V7z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M9 12l2 2 4-5\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path></svg>", "primary": "https://openteamag.gitlab.io/codesign/code-of-conduct/", "more": "Project site ↗ GitLab ↗"}, {"title": "OpenTEAM Convention", "subtitle": "Repository folder for OpenTEAM Convention materials.", "pills": ["Status: Active", "Theme: Governance"], "links": [{"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/ag-data-wallet/openteam-convention"}], "cover": "assets/wg-project-card-openteam-convention.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M12 2l3 6 7 1-5 5 1 8-6-3-6 3 1-8-5-5 7-1z\" fill=\"none\" stroke=\"currentColor\" stroke-linejoin=\"round\" stroke-width=\"2\"></path></svg>", "primary": "https://gitlab.com/OpenTEAMAg/ag-data-wallet/openteam-convention", "more": "GitLab ↗"}], "Ethical AI & Data Stewardship": [{"title": "Ag Data Wallet", "subtitle": "Project site for Agricultural Data Wallet materials and outcomes.", "pills": ["Status: Archive", "Theme: Data tools"], "links": [{"label": "Project site ↗", "href": "https://openteamag.gitlab.io/agricultural-data-wallet/"}, {"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/ag-data-wallet"}], "cover": "assets/wg-project-card-ag-data-wallet.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M4 7h16v12H4z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M4 7l2-3h14\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path><path d=\"M16 13h4v3h-4a2 2 0 0 1 0-3z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path></svg>", "primary": "https://openteamag.gitlab.io/agricultural-data-wallet/", "more": "Project site ↗ GitLab ↗"}], "Regenerative Economics": [{"title": "Marketplace Working Group", "subtitle": "Working group charter, glossary, and shared framing for marketplace efforts.", "pills": ["Status: Archive", "Theme: Working group"], "links": [{"label": "Project site ↗", "href": "https://openteamag.gitlab.io/codesign/markets/"}, {"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/codesign/markets"}], "cover": "assets/wg-project-card-marketplace-working-group.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M4 9h16l-1 12H5z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M7 9V6a5 5 0 0 1 10 0v3\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path><path d=\"M8 13h.01M12 13h.01M16 13h.01\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"3\"></path></svg>", "primary": "https://openteamag.gitlab.io/codesign/markets/", "more": "Project site ↗ GitLab ↗"}], "Data & Interoperability": [{"title": "Fair Tech Registry Collabathon", "subtitle": "Co-design and collaboration activities supporting the FAIR Tech Registry.", "pills": ["Status: Complete", "Theme: Registry"], "links": [{"label": "Project site ↗", "href": "https://openteamag.gitlab.io/codesign/fair-registry/"}, {"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/codesign/fair-registry"}], "cover": "assets/wg-project-card-fair-tech-registry-collabathon.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M7 7h10v10H7z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M4 4h16v16H4z\" fill=\"none\" opacity=\".7\" stroke=\"currentColor\" stroke-width=\"1.6\"></path></svg>", "primary": "https://openteamag.gitlab.io/codesign/fair-registry/", "more": "Project site ↗ GitLab ↗"}, {"title": "PCSC farmOS Module", "subtitle": "Project space for a farmOS module and related implementation notes.", "pills": ["Status: Archive", "Theme: farmOS"], "links": [{"label": "Project site ↗", "href": "https://openteamag.gitlab.io/codesign/pcsc/"}, {"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/codesign/pcsc"}], "cover": "assets/wg-project-card-pcsc-farmos-module.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M9 3v6M15 3v6\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path><path d=\"M7 9h10v3a5 5 0 0 1-10 0z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M12 17v4\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path></svg>", "primary": "https://openteamag.gitlab.io/codesign/pcsc/", "more": "Project site ↗ GitLab ↗"}], "Governance in Practice": [{"title": "FAIR Tech Registry Documentation", "subtitle": "Developer-oriented documentation for the FAIR Tech Registry.", "pills": ["Status: Active", "Theme: Docs"], "links": [{"label": "Project site ↗", "href": "https://openteamag.gitlab.io/fair-tech-registry/devs/"}, {"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/fair-tech-registry"}], "cover": "assets/wg-project-card-fair-tech-registry-documentation.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M7 3h7l3 3v15H7z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M14 3v4h4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M9 12h6M9 15h6M9 18h6\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path></svg>", "primary": "https://openteamag.gitlab.io/fair-tech-registry/devs/", "more": "Project site ↗ GitLab ↗"}, {"title": "Agricultural Data Use Documents", "subtitle": "Ag data use agreements and related reference documents.", "pills": ["Status: Active", "Theme: Agreements"], "links": [{"label": "Project site ↗", "href": "https://openteam-agreements.community/"}, {"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/agreements"}], "cover": "assets/wg-project-card-agricultural-data-use-documents.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M7 3h10v18H7z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M9 7h6M9 11h6M9 15h4\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path><path d=\"M14 17l2 2 4-4\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path></svg>", "primary": "https://openteam-agreements.community/", "more": "Project site ↗ GitLab ↗"}, {"title": "Documentation", "subtitle": "Top-level documentation repositories and related assets.", "pills": ["Status: Active", "Theme: Docs"], "links": [{"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/documentation"}], "cover": "assets/wg-project-card-documentation.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M6 4h10a2 2 0 0 1 2 2v14H8a2 2 0 0 0-2 2z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M6 4v16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M8 8h8\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path></svg>", "primary": "https://gitlab.com/OpenTEAMAg/documentation", "more": "GitLab ↗"}, {"title": "USDA Cooperative Agreements", "subtitle": "Folder for cooperative agreement materials and related project work.", "pills": ["Status: Archive", "Theme: Agreements"], "links": [{"label": "GitLab ↗", "href": "https://gitlab.com/OpenTEAMAg/usda-cooperative-agreements"}], "cover": "assets/wg-project-card-usda-cooperative-agreements.jpg", "icon": "<svg aria-hidden=\"true\" viewbox=\"0 0 24 24\"><path d=\"M8 12l2 2c1 1 3 1 4 0l4-4\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\"></path><path d=\"M3 12l5-5 4 4-5 5H3z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"M21 12l-5-5-4 4 5 5h4z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path></svg>", "primary": "https://gitlab.com/OpenTEAMAg/usda-cooperative-agreements", "more": "GitLab ↗"}], "Metagov Projects": [{"title": "The Protopian Fiction Prize", "subtitle": "Write the story of humanity's future.", "cover": "https://metagov.org/media/pages/projects/protopian/21feed2742-1768435511/globe-dithered.png", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/protopian"}], "primary": "https://metagov.org/projects/protopian"}, {"title": "Atlas Computing", "subtitle": "Mapping the way to human governance of AI", "cover": "https://metagov.org/media/pages/projects/atlas-computing/13c84f76f9-1756312156/atlascomputing.jpg", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/atlas-computing"}], "primary": "https://metagov.org/projects/atlas-computing"}, {"title": "Attention Economy", "subtitle": "Intersection of attention economies and governance experience design", "cover": "https://metagov.org/media/pages/projects/attentionecon/820fb35067-1751175556/default_shaded.png", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/attentionecon"}], "primary": "https://metagov.org/projects/attentionecon"}, {"title": "Governable Spacemakers Fellowship", "subtitle": "Where and how governance happens online is evolving", "cover": "https://metagov.org/media/pages/projects/governable-spacemakers-fellowship/f3062d056c-1748540628/space-makers-moving.gif", "pills": ["Metagov", "Community"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/governable-spacemakers-fellowship"}], "primary": "https://metagov.org/projects/governable-spacemakers-fellowship"}, {"title": "Theory + Practice", "subtitle": "Connecting (new) political theory with new democratic practice", "cover": "https://metagov.org/media/pages/projects/theory-practice/d6d274c0c3-1743615321/t-p-3-small.png", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/theory-practice"}], "primary": "https://metagov.org/projects/theory-practice"}, {"title": "Cryptoeconomic Systems", "subtitle": "Cryptoeconomic Systems", "cover": "https://metagov.org/media/pages/projects/cryptoeconomic-systems/f24d711554-1733076312/screen-shot-2024-12-01-at-12.04.47-pm.png", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/cryptoeconomic-systems"}], "primary": "https://metagov.org/projects/cryptoeconomic-systems"}, {"title": "Interoperable Deliberative Tools", "subtitle": "Homebase for interoperable deliberative tools", "cover": "data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' width='480' height='720'>\n<defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23e9fff2'/><stop offset='1' stop-color='%23b6e7c7'/></linearGradient></defs>\n<rect width='100%' height='100%' fill='url(%23g)'/>\n<circle cx='380' cy='110' r='70' fill='%23ffffff' opacity='0.55'/>\n<circle cx='330' cy='170' r='42' fill='%23000000' opacity='0.07'/>\n<text x='36' y='660' font-family='Arial' font-size='34' fill='%230b2b1a' font-weight='700'>Interoperable Delibera</text>\n</svg>", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/interop"}], "primary": "https://metagov.org/projects/interop"}, {"title": "Mathematics for Governance Design", "subtitle": "Mathematics for Governance Design", "cover": "https://metagov.org/media/pages/projects/mathematics-for-governance-design/aac7795227-1732560935/screen-shot-2024-11-25-at-10.55.06-am.png", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/mathematics-for-governance-design"}], "primary": "https://metagov.org/projects/mathematics-for-governance-design"}, {"title": "KOI Pond", "subtitle": "Experiments in online community self-governance using an LLM-mediated KOI", "cover": "https://metagov.org/media/pages/projects/koi-pond/01f7edd29a-1741974414/koi.png", "pills": ["Metagov", "Tool"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/koi-pond"}], "primary": "https://metagov.org/projects/koi-pond"}, {"title": "Constitutions of Web3", "subtitle": "Analysis and guides for DAO constitutions", "cover": "https://metagov.org/media/pages/projects/constitutions-of-web3/2fe8adbaef-1709309833/constit.png", "pills": ["Metagov", "Publication"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/constitutions-of-web3"}], "primary": "https://metagov.org/projects/constitutions-of-web3"}, {"title": "Cryptopolitics", "subtitle": "A study of politics and ideology in crypto", "cover": "https://metagov.org/media/pages/projects/cryptopolitics/06905a4367-1709252374/cryptopolitics_all_stickers.jpg", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/cryptopolitics"}], "primary": "https://metagov.org/projects/cryptopolitics"}, {"title": "D20 Governance", "subtitle": "LLM-mediated modular governance games on Discord", "cover": "https://metagov.org/media/pages/projects/d20-governance/a9f69b3650-1709111871/d20_governance.jpg", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/d20-governance"}], "primary": "https://metagov.org/projects/d20-governance"}, {"title": "DAO Science", "subtitle": "A survey paper and community site", "cover": "https://metagov.org/media/pages/projects/dao-science/4711ccfb1f-1709253730/dao_science.png", "pills": ["Metagov", "Roundtable"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/dao-science"}], "primary": "https://metagov.org/projects/dao-science"}, {"title": "DAOchem", "subtitle": "A holistic view of DAO governance", "cover": "https://metagov.org/media/pages/projects/daochem/8afeee59c6-1709254113/dao_chem.png", "pills": ["Metagov", "Roundtable"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/daochem"}], "primary": "https://metagov.org/projects/daochem"}, {"title": "Digital Ethnography Reading Group", "subtitle": "Digital ethnography reading group podcasts", "cover": "https://metagov.org/media/pages/projects/digital-ethnography-reading-group/c98080f2b7-1708447035/default_shaded.png", "pills": ["Metagov", "Community"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/digital-ethnography-reading-group"}], "primary": "https://metagov.org/projects/digital-ethnography-reading-group"}, {"title": "Governance Ecologies", "subtitle": "Exploration of historical governance practices", "cover": "https://metagov.org/media/pages/projects/governance-ecologies/8ddab38fa9-1746131858/goveco-removebg-preview.png", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/governance-ecologies"}], "primary": "https://metagov.org/projects/governance-ecologies"}, {"title": "Governance Experience Design", "subtitle": "A living manifesto for online spaces", "cover": "https://metagov.org/media/pages/projects/governance-experience-design/fd8fd40671-1709253305/gov_ex_design.jpg", "pills": ["Metagov", "Publication"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/governance-experience-design"}], "primary": "https://metagov.org/projects/governance-experience-design"}, {"title": "Governance Research Round", "subtitle": "A quadratic funding round", "cover": "https://metagov.org/media/pages/projects/governance-research-round/2b9ee92f39-1708447035/default_shaded.png", "pills": ["Metagov", "Community"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/governance-research-round"}], "primary": "https://metagov.org/projects/governance-research-round"}, {"title": "Governance Surfaces", "subtitle": "Tool for analyzing DAO contracts", "cover": "https://metagov.org/media/pages/projects/governance-surfaces/5f67cd42a1-1708447035/default_shaded.png", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/governance-surfaces"}], "primary": "https://metagov.org/projects/governance-surfaces"}, {"title": "Grant Innovation Lab", "subtitle": "Research and community for granting and impact measurement", "cover": "data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' width='480' height='720'>\n<defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23e9fff2'/><stop offset='1' stop-color='%23b6e7c7'/></linearGradient></defs>\n<rect width='100%' height='100%' fill='url(%23g)'/>\n<circle cx='380' cy='110' r='70' fill='%23ffffff' opacity='0.55'/>\n<circle cx='330' cy='170' r='42' fill='%23000000' opacity='0.07'/>\n<text x='36' y='660' font-family='Arial' font-size='34' fill='%230b2b1a' font-weight='700'>Grant Innovation Lab</text>\n</svg>", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/grant-lab"}], "primary": "https://metagov.org/projects/grant-lab"}, {"title": "Groundwork Fellowship", "subtitle": "Internet infrastructure design and marginalization fellowship", "cover": "https://metagov.org/media/pages/projects/groundwork-fellowship/d83f500c02-1713925134/groundwork-photo_collage-bgs.png", "pills": ["Metagov", "Community"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/groundwork-fellowship"}], "primary": "https://metagov.org/projects/groundwork-fellowship"}, {"title": "LARP Governance", "subtitle": "Governance LARP ethnography and history report", "cover": "https://metagov.org/media/pages/projects/larp-governance/17b4c1964f-1708447035/default_shaded.png", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/larp-governance"}], "primary": "https://metagov.org/projects/larp-governance"}, {"title": "Modpol", "subtitle": "A governance mod for Minetest", "cover": "https://metagov.org/media/pages/projects/modpol/7680a60fcf-1709132695/modpol.png", "pills": ["Metagov", "Tool"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/modpol"}], "primary": "https://metagov.org/projects/modpol"}, {"title": "Modular Politics", "subtitle": "A governance layer for the internet", "cover": "https://metagov.org/media/pages/projects/modular-politics/a3826a143b-1709249866/modular_politics.jpg", "pills": ["Metagov", "Publication"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/modular-politics"}], "primary": "https://metagov.org/projects/modular-politics"}, {"title": "Redwood Parliament", "subtitle": "Governance convocation event", "cover": "https://metagov.org/media/pages/projects/redwood-parliament/41772921cb-1709250190/redwood_parliament.jpg", "pills": ["Metagov", "Community"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/redwood-parliament"}], "primary": "https://metagov.org/projects/redwood-parliament"}, {"title": "Validator Commons", "subtitle": "Coalition of validators and allies", "cover": "https://metagov.org/media/pages/projects/validator-commons/efaa7552d2-1709254621/validator_commons.png", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/validator-commons"}], "primary": "https://metagov.org/projects/validator-commons"}, {"title": "CommunityRule", "subtitle": "A user-friendly governance toolkit", "cover": "https://metagov.org/media/pages/projects/communityrule/d529c89347-1709247984/community_rule.jpg", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/communityrule"}], "primary": "https://metagov.org/projects/communityrule"}, {"title": "Composing Games into Complex Institutions", "subtitle": "Research paper", "cover": "https://metagov.org/media/pages/projects/game-theory/61d6da6681-1709249413/complex-games-m.jpg", "pills": ["Metagov", "Publication"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/composing-games-into-complex-institutions"}], "primary": "https://metagov.org/projects/composing-games-into-complex-institutions"}, {"title": "AI Renaissance", "subtitle": "Residency for open-source, decentralized, public AI", "cover": "https://metagov.org/media/pages/projects/ai-renaissance/c52faabeca-1708447035/aipalace.jpg", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/ai-renaissance"}], "primary": "https://metagov.org/projects/ai-renaissance"}, {"title": "Calm Technology", "subtitle": "Standards body for aligning attention with technology", "cover": "https://metagov.org/media/pages/projects/calm-technology/c2ea4fe649-1716293567/calm-tech-institute-logo.png", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/calm-technology"}], "primary": "https://metagov.org/projects/calm-technology"}, {"title": "Govbase Dataset", "subtitle": "Research datasets in online governance", "cover": "https://metagov.org/media/pages/projects/govbase-dataset/075d836730-1708447035/govbase_data.jpg", "pills": ["Metagov", "Tool"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/govbase-dataset"}], "primary": "https://metagov.org/projects/govbase-dataset"}, {"title": "Govbase Labs", "subtitle": "Weekly lab meeting", "cover": "https://metagov.org/media/pages/projects/govbase-labs/5aef775cee-1708447035/govbase.jpg", "pills": ["Metagov", "Community"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/govbase-labs"}], "primary": "https://metagov.org/projects/govbase-labs"}, {"title": "Metagov Gateway", "subtitle": "API gateway for digital governance services", "cover": "https://metagov.org/media/pages/projects/metagov-gateway/089efc0288-1705328802/gateway.jpg", "pills": ["Metagov", "Tool"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/metagov-gateway"}], "primary": "https://metagov.org/projects/metagov-gateway"}, {"title": "MetagovDAO", "subtitle": "Funding body for qualitative governance research on DAOs", "cover": "https://metagov.org/media/pages/projects/metagovdao/cd2fa49472-1708447035/metagov_dao.jpg", "pills": ["Metagov", "Roundtable"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/metagovdao"}], "primary": "https://metagov.org/projects/metagovdao"}, {"title": "Metagov Seminar", "subtitle": "Weekly seminar", "cover": "https://metagov.org/media/pages/projects/metagovernance-seminar/ac83387cf7-1708447035/metagov_seminar.jpg", "pills": ["Metagov", "Community"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/metagov-seminar"}], "primary": "https://metagov.org/projects/metagov-seminar"}, {"title": "OSS Transitions", "subtitle": "NSF-funded collaboration", "cover": "https://metagov.org/media/pages/projects/oss-transitions/59c519349a-1708447035/default.png", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/oss-transitions"}], "primary": "https://metagov.org/projects/oss-transitions"}, {"title": "PolicyKit", "subtitle": "Engine for building governance in online communities", "cover": "https://metagov.org/media/pages/projects/policykit/da151d8deb-1708447035/policykit.jpg", "pills": ["Metagov", "Tool"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/policykit"}], "primary": "https://metagov.org/projects/policykit"}, {"title": "Public AI", "subtitle": "A new political economy for AI", "cover": "https://metagov.org/media/pages/projects/public-ai/64b06615f3-1708447035/publicai.jpg", "pills": ["Metagov", "Project"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/public-ai"}], "primary": "https://metagov.org/projects/public-ai"}, {"title": "Telescope", "subtitle": "Discord bot for ethical, responsive digital ethnography", "cover": "https://metagov.org/media/pages/projects/telescope/c72b993c45-1708447035/telescope.jpg", "pills": ["Metagov", "Tool"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/telescope"}], "primary": "https://metagov.org/projects/telescope"}, {"title": "Agreement Engine", "subtitle": "Tool for building net-native agreement systems", "cover": "https://metagov.org/media/pages/projects/agreement-engine/f7114d2c94-1700846822/net-native-agreement-systems.jpg", "pills": ["Metagov", "Tool"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/agreement-engine"}], "primary": "https://metagov.org/projects/agreement-engine"}, {"title": "DAOstar", "subtitle": "Standards body of the DAO ecosystem", "cover": "https://metagov.org/media/pages/projects/daostar/42f57ad6f1-1700846822/daostar.jpg", "pills": ["Metagov", "Roundtable"], "links": [{"label": "Project page ↗", "href": "https://metagov.org/projects/daostar"}], "primary": "https://metagov.org/projects/daostar"}]};
+
+  const PLACEHOLDER = "assets/wg-project-card-placeholder.jpg";
+
+  function pillHTML(text) {
+    return `<span class="wg-pill">${text}</span>`;
+  }
+
+  function linksHTML(links) {
+    if (!links || !links.length) return "";
+    return links.map(l => `<a class="scard-link" href="${l.href}" target="_blank" rel="noopener">${l.label}</a>`).join("");
+  }
+
+  function cardHTML(c) {
+    const cover = c.cover || PLACEHOLDER;
+    const pills = (c.pills||[]).map(pillHTML).join("");
+    const more = linksHTML(c.links);
+
+    return `
+      <article class="scard" data-expanded="false">
+        <a class="scard-cover" href="${c.primary || (c.links && c.links[0] && c.links[0].href) || '#'}" target="_blank" rel="noopener">
+          <img src="${cover}" alt="" loading="lazy" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
+        </a>
+        <div class="scard-body">
+          <div class="scard-title">${c.title}</div>
+          <div class="scard-sub">${c.subtitle || ""}</div>
+          <div class="scard-pills">${pills}</div>
+
+          <button class="more-btn" type="button" aria-expanded="false">More</button>
+          <div class="more-panel" hidden>
+            <div class="more-links">${more}</div>
+          </div>
+        </div>
+      </article>
+    `;
+  }
+
+  function railBlock(theme) {
+    const themeId = "rail-" + theme.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+    return `
+      <div class="theme-block">
+        <div class="rail-card">
+          <div class="rail-head">
+            <h3 class="rail-title">${theme}</h3>
+          </div>
+            ${theme === "Metagov Projects" ? `<div class="rail-filters"><input class="rail-search" type="search" placeholder="Filter OpenTEAM projects…" data-filter="metagov-q" aria-label="Filter OpenTEAM projects"><select class="rail-select" data-filter="metagov-type" aria-label="Filter Metagov by type"><option value="All">All types</option><option value="Tool">Tool</option><option value="Publication">Publication</option><option value="Community">Community</option><option value="Roundtable">Roundtable</option><option value="Project">Project</option></select></div>` : ``}
+          <div class="rail-wrap">
+            <button class="rail-arrow-end rail-arrow-left" type="button" data-rail="${themeId}" data-dir="-1" aria-label="Scroll left">
+              <svg viewBox="0 0 24 24"><path d="M15.4 19.4 8 12l7.4-7.4 1.4 1.4L10.8 12l6 6z"/></svg>
+            </button>
+            <div class="rail" id="${themeId}" role="region" aria-label="${theme} rail"></div>
+            <button class="rail-arrow-end rail-arrow-right" type="button" data-rail="${themeId}" data-dir="1" aria-label="Scroll right">
+              <svg viewBox="0 0 24 24"><path d="m8.6 4.6 7.4 7.4-7.4 7.4-1.4-1.4 6-6-6-6z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  
+  const METAGOV_FILTER = { q: "", type: "All" };
+
+  function getCardsForTheme(theme) {
+    const cards = (THEMES[theme] || []);
+    if (theme !== "Metagov Projects") return cards;
+    const q = (METAGOV_FILTER.q || "").trim().toLowerCase();
+    const t = METAGOV_FILTER.type || "All";
+    return cards.filter(c => {
+      const hay = (c.title + " " + (c.subtitle||"") + " " + (c.pills||[]).join(" ")).toLowerCase();
+      const okQ = !q || hay.includes(q);
+      const typePill = (c.pills||[]).find(p => ["Tool","Publication","Community","Roundtable","Project"].includes(p));
+      const okT = (t === "All") || (typePill === t);
+      return okQ && okT;
+    });
+  }
+function render() {
+    const el = document.getElementById("themes");
+    if (!el) return;
+    el.innerHTML = THEMES_ORDER.map(railBlock).join("");
+    for (const theme of THEMES_ORDER) {
+      const themeId = "rail-" + theme.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+      const rail = document.getElementById(themeId);
+      const list = getCardsForTheme(theme);
+      rail.innerHTML = list.map(cardHTML).join("");
+    }
+
+    // Metagov filters
+    const qEl = document.querySelector('[data-filter="metagov-q"]');
+    const tEl = document.querySelector('[data-filter="metagov-type"]');
+    const rerenderMetagov = () => {
+      const theme = "Metagov Projects";
+      const themeId = "rail-" + theme.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+      const rail = document.getElementById(themeId);
+      if (!rail) return;
+      rail.innerHTML = getCardsForTheme(theme).map(cardHTML).join("");
+    };
+    if (qEl) qEl.addEventListener('input', (e) => { METAGOV_FILTER.q = e.target.value || ""; rerenderMetagov(); });
+    if (tEl) tEl.addEventListener('change', (e) => { METAGOV_FILTER.type = e.target.value || "All"; rerenderMetagov(); });
+
+    // scroll arrows
+    document.querySelectorAll(".rail-arrow-end").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-rail");
+        const dir = Number(btn.getAttribute("data-dir")) || 1;
+        const rail = document.getElementById(id);
+        if (!rail) return;
+        const amt = Math.max(260, Math.round(rail.clientWidth * 0.85));
+        rail.scrollBy({ left: dir * amt, behavior: "smooth" });
+      });
+    });
+
+    // more toggles
+    document.querySelectorAll(".scard .more-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const card = btn.closest(".scard");
+        const panel = card.querySelector(".more-panel");
+        const expanded = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", String(!expanded));
+        panel.hidden = expanded;
+        card.dataset.expanded = String(!expanded);
+        btn.textContent = expanded ? "More" : "Less";
+      });
+    });
+  }
+
+  render();
+
+function stampOpenteamThemes(){
+  const rail = document.querySelector('.rail[data-scope="openteam"]');
+  if(!rail) return;
+  rail.querySelectorAll('.wg-project-card, .pcard').forEach(card=>{
+    if(card.getAttribute('data-theme')) return;
+    const pill = card.querySelector('.wg-pill');
+    let t = pill ? pill.textContent.replace(/^theme:\s*/i,'').trim() : '';
+    if(t) card.setAttribute('data-theme', t);
+  });
+}
+
+</script>
+<script src="script.js">
+function applyRailFilters(scope){
+  const q = (document.querySelector(`.filter-search[data-scope="${scope}"]`)?.value || "").toLowerCase().trim();
+  const active = Array.from(document.querySelectorAll(`.filter-chips[data-scope="${scope}"] .chip.is-active`))
+    .map(x=>x.getAttribute("data-value"))
+    .filter(Boolean);
+
+  const rail = document.querySelector(`.rail[data-scope="${scope}"]`);
+  if(!rail) return;
+
+  const activeThemes = active.includes("All types") ? [] : active;
+
+  rail.querySelectorAll(".pcard, .wg-project-card").forEach(card=>{
+    const theme = card.getAttribute("data-theme") || "";
+    const txt = card.innerText.toLowerCase();
+    const okQ = !q || txt.includes(q);
+    const okT = activeThemes.length===0 || activeThemes.includes(theme);
+    card.style.display = (okQ && okT) ? "" : "none";
+  });
+}
+
+document.addEventListener("click", (e)=>{
+  const chip = e.target.closest(".chip");
+  if(chip && chip.closest(".filter-chips")){
+    const chipsWrap = chip.closest(".filter-chips");
+    const scope = chipsWrap.getAttribute("data-scope");
+    chipsWrap.querySelectorAll(".chip").forEach(c => c.classList.remove("is-active"));
+    chip.classList.add("is-active");
+    applyRailFilters(scope);
+  }
+});
+document.addEventListener("input", (e)=>{
+  const inp = e.target.closest(".filter-search");
+  if(inp){
+    applyRailFilters(inp.getAttribute("data-scope"));
+  }
+});
+
+
+function stampOpenteamThemes(){
+  const rail = document.querySelector('.rail[data-scope="openteam"]');
+  if(!rail) return;
+  rail.querySelectorAll('.wg-project-card, .pcard').forEach(card=>{
+    if(card.getAttribute('data-theme')) return;
+    const pill = card.querySelector('.wg-pill');
+    let t = pill ? pill.textContent.replace(/^theme:\s*/i,'').trim() : '';
+    if(t) card.setAttribute('data-theme', t);
+  });
+}
+
+</script>
+</body>
+</html>
